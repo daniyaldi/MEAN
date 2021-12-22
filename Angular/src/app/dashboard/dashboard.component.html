@@ -1,0 +1,55 @@
+<table class="table">
+    <tr>
+        <td>Username</td>
+        <td>password</td>
+    </tr>
+    <tr class="col"   *ngFor="let emp of employeeService.employees let i=index"  >        
+    <td class="row">
+        {{emp.email}}
+    </td>
+    <td>
+        {{emp.password}}
+    </td>
+    <td>   
+        <button  class="btn btn-lg btn-outline-primary" (click)="onDelete(emp._id)" > Delete data</button>
+        <button class="btn btn-lg btn-outline-primary" (click)="open(content);onEdit(emp) "  > Update data</button>
+    </td>
+    </tr>
+ 
+</table>
+    
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)" >
+            <div class="row ">
+                <div class="input-field col s12">
+                    <input type="email" name="email" [email]="true"  #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.email" placeholder="enter Valid Email" >
+                <label>Email :
+                    <label class="red-text">*</label>
+                 </label>
+                </div>
+                <div class="input-field col s12">
+                    <input type="text"  name="password" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.password" placeholder="enter valid password" >
+                <label>Password:
+                    <label class="red-text">*</label>
+                 </label>
+                </div>
+            </div>
+            <div class ="input-field col s12" >
+            <button class="btn btn-custom right " type="Submit" >Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+  
+  
+  <hr>
